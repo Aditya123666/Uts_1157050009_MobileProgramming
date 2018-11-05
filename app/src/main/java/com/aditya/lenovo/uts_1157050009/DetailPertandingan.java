@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +37,10 @@ public class DetailPertandingan extends AppCompatActivity {
     @BindView(R.id.description)
     TextView description;
 
+//    Button link;
+//    @BindView(R.id.btnlink)
+//    Button link;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,7 @@ public class DetailPertandingan extends AppCompatActivity {
         setContentView(R.layout.activity_detail_pertandinga);
         ButterKnife.bind(this);
 
+        Button link = findViewById(R.id.btnlink);
         Toolbar toolbar = findViewById(R.id.toolbar); //Inisialisasi dan Implementasi id Toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,6 +69,17 @@ public class DetailPertandingan extends AppCompatActivity {
         description.setText(descriptionMatch);
         ivHomee.setImageResource(getIntent().getIntExtra("imagehome", 0));
         ivAwayy.setImageResource(getIntent().getIntExtra("imageaway", 0));
+
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = news;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +94,8 @@ public class DetailPertandingan extends AppCompatActivity {
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
